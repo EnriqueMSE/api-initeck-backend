@@ -67,9 +67,19 @@ class CustomersDao {
       const sql = 'UPDATE customers SET name = ?, address = ?, coordinates = ?, product = ? WHERE id = ?';
       connection.query(sql, [name, address, coordinates, product, id], (err, results) => {
         if (err) return reject(err);
-        resolve(results);
+          resolve(results);
       });
     });
+  }
+
+  static async updateStatus(id, status) {
+    return new Promise((resolve, reject) => {
+      const sql = 'UPDATE customers SET status = ? WHERE id = ? ';
+      connection.query(sql, [status, id], (err, results) => {
+        if (err) return reject(err);
+          resolve(results);
+      })
+    })
   }
 
 }

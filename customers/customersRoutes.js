@@ -150,4 +150,6 @@ router.delete('/customers/:id', CustomersController.deleteCustomers);
  */
 router.put('/customers/:id', CustomersController.updateCustomers);
 
+router.patch('/customers/status/:id/:status', CustomersController.updateStatus);
+
 module.exports = router;

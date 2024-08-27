@@ -71,6 +71,18 @@ class CustomersController {
     }
   }
 
+  static async updateStatus(req, res) {
+    const { id } = req.params;
+    const { status } = req.params;
+    try {
+      await CustomersDao.updateStatus(id, status);
+      res.status(200).json({ message: 'Status actualizado correctamente' });
+    } catch (err) {
+      console.error('Error al actualizar status:', err);
+      res.status(500).json({ message: 'Error al actualizar el status' });
+    }
+  }
+
   static async deleteCustomers(req, res) {
     try {
       const { id } = req.params;
