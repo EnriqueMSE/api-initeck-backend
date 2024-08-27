@@ -65,5 +65,8 @@ router.post('/login', AuthController.login);
  */
 router.post('/register', AuthController.register);
 
-module.exports = router;
+router.post('/recover-password', AuthController.recoverPassword);
 
+router.post('/reset-password', AuthController.recoverPassword)
+
+module.exports = router;
