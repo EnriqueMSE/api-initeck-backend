@@ -65,7 +65,7 @@ router.post('/productos', ProductsController.crearProducto);
  *                   description:
  *                     type: string
  */
-router.get('/productos', ProductsController.obtenerTodosLosProductos);
+router.get('/productos', ProductsController.getAllProducts);
 
 /**
  * @swagger

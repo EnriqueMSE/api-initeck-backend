@@ -12,9 +12,9 @@ class ProductsDao {
     });
   }
 
-  static async obtenerTodosLosProductos() {
+  static async getAllProducts() {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM products';
+      const sql = 'SELECT * FROM products WHERE is_deleted = 0';
       connection.query(sql, (err, results) => {
         if (err) return reject(err);
         resolve(results);

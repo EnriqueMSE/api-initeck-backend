@@ -13,10 +13,10 @@ class ProductsController {
     }
   }
 
-  static async obtenerTodosLosProductos(req, res) {
+  static async getAllProducts(req, res) {
     try {
-      const productos = await ProductsDao.obtenerTodosLosProductos();
-      res.status(200).json(productos);
+      const products = await ProductsDao.getAllProducts();
+      res.status(200).json(products);
     } catch (err) {
       console.error('Error al obtener productos:', err);
       res.status(500).json({ message: 'Error al obtener productos' });
