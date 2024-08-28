@@ -14,7 +14,7 @@ class CustomersDao {
 
   static async getCustomers() {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM customers';
+      const sql = 'SELECT * FROM customers WHERE is_deleted = 0';
       connection.query(sql, (err, results) => {
         if (err) return reject(err);
         resolve(results);
@@ -54,11 +54,11 @@ class CustomersDao {
 
   static async deleteCustomers(id) {
     return new Promise((resolve, reject) => {
-      const sql = 'UPDATE customers SET is_deleted = 1 WHERE id = ?';
+      const sql = 'UPDATE customers SET is_deleted = 1 WHERE id = ? ';
       connection.query(sql, [id], (err, results) => {
         if (err) return reject(err);
-        resolve(results);
-      });
+          resolve(results);
+      })
     });
   }
 

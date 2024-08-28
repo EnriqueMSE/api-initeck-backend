@@ -86,7 +86,7 @@ class CustomersController {
   static async deleteCustomers(req, res) {
     try {
       const { id } = req.params;
-      await CustomersDao.updateCustomers(id);
+      await CustomersDao.deleteCustomers(id);
       res.status(200).json({ message: 'Producto eliminado correctamente' });
     } catch (err) {
       console.error('Error al eliminar producto:', err);
