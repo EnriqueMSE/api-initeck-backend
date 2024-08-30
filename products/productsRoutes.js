@@ -37,7 +37,7 @@ const router = express.Router();
  *       400:
  *         description: Error en la solicitud
  */
-router.post('/productos', ProductsController.crearProducto);
+router.post('/productos', ProductsController.createProduct);
 
 /**
  * @swagger
@@ -86,7 +86,7 @@ router.get('/productos', ProductsController.getAllProducts);
  *       404:
  *         description: Producto no encontrado
  */
-router.delete('/productos/:id', ProductsController.eliminarProducto);
+router.delete('/productos/:id', ProductsController.detedProduct);
 
 /**
  * @swagger
@@ -121,6 +121,6 @@ router.delete('/productos/:id', ProductsController.eliminarProducto);
  *       404:
  *         description: Producto no encontrado
  */
-router.put('/productos/:id', ProductsController.editarProducto);
+router.put('/productos/:id', ProductsController.editProduct);
 
 module.exports = router;

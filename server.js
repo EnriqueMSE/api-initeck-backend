@@ -8,7 +8,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const authRouter = require('./auth/authRoutes');
 const productsRoutes = require('./products/productsRoutes');
 const customersRoutes = require('./customers/customersRoutes');
-const paymentsRoutes = require('./payments/paymentsRoutes');
+const transactionsRoutes = require('./transactions/transactionsRoutes');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -29,7 +29,13 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ['./products/productsRoutes.js', './auth/authRoutes.js', './customers/customersRoutes.js'],
+  apis: [
+    './auth/authRoutes.js',
+    './products/productsRoutes.js',
+    './customers/customersRoutes.js',
+    './transactions/transactionsRoutes.js'
+    // './errorMiddleware.js',  // Middleware para manejar errores globales
+  ],
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
@@ -47,7 +53,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/api', authRouter);
 app.use('/api', productsRoutes);
 app.use('/api', customersRoutes);
-app.use('/api', paymentsRoutes);
+app.use('/api', transactionsRoutes);
 
 // Iniciar el servidor
 app.listen(port, () => {

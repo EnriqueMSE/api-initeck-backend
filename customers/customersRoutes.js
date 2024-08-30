@@ -70,6 +70,8 @@ router.get('/customers', CustomersController.getCustomers);
 
 router.get('/customers/count', CustomersController.getCountCustomers);
 
+router.get('/customers/inactive_count', CustomersController.getCountInactive);
+
 router.get('/customers/most_frequent_products', CustomersController.getMostFrequentProducts);
 
 /**

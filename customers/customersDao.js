@@ -2,10 +2,10 @@
 const connection = require('../db');
 
 class CustomersDao {
-  static async createCustomers(name, address, coordinates, product) {
+  static async createCustomers(name, address, coordinates, product, status) {
     return new Promise((resolve, reject) => {
-      const sql = 'INSERT INTO customers (name, address, coordinates, product) VALUES (?, ?, ?, ?)';
-      connection.query(sql, [name, address, coordinates, product], (err, results) => {
+      const sql = 'INSERT INTO customers (name, address, coordinates, product, status) VALUES (?, ?, ?, ?, ?)';
+      connection.query(sql, [name, address, coordinates, product, status], (err, results) => {
         if (err) return reject(err);
         resolve(results);
       });
@@ -34,7 +34,17 @@ class CustomersDao {
 
   static async getCountCustomers() {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT COUNT(*) as count FROM customers WHERE is_deleted = 0';
+      const sql = 'SELECT COUNT(*) as count FROM customers WHERE is_deleted = 0 AND status = "ACTIVO" ';
+      connection.query(sql, (err, results) => {
+        if (err) return reject(err);
+        resolve(results[0].count);
+      });
+    });
+  }
+
+  static async getCountInactive() {
+    return new Promise((resolve, reject) => {
+      const sql = 'SELECT COUNT(*) as count FROM customers WHERE is_deleted = 0 AND status = "INACTIVO" ';
       connection.query(sql, (err, results) => {
         if (err) return reject(err);
         resolve(results[0].count);

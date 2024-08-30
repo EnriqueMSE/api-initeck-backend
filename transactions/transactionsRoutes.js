@@ -1,21 +1,21 @@
 const express = require('express');
-const PaymentsController = require('./paymentsController');
+const TransactionsController = require('./transactionsController');
 
 const router = express.Router();
 
 /**
  * @swagger
  * tags:
- *   name: Payments
- *   description: API para gestionar pagos
+ *   name: Transaction
+ *   description: API para gestionar movimientos
  */
 
 /**
  * @swagger
  * /payments:
  *   post:
- *     summary: Crea un nuevo pago
- *     tags: [Payments]
+ *     summary: Crea un nuevo movimiento
+ *     tags: [Transactions]
  *     requestBody:
  *       required: true
  *       content:
@@ -33,11 +33,11 @@ const router = express.Router();
  *                 type: string
  *     responses:
  *       201:
- *         description: Pago creado exitosamente
+ *         description: Movimiento creado exitosamente
  *       400:
  *         description: Error en la solicitud
  */
-router.post('/payments', PaymentsController.createPayments);
+router.post('/transactions', TransactionsController.createTransactions);
 
 /**
  * @swagger
@@ -66,7 +66,7 @@ router.post('/payments', PaymentsController.createPayments);
  *                   product:
  *                     type: string
  */
-// router.get('/customers', PaymentsController.getCustomers);
+router.get('/transactions', TransactionsController.getTransactions);
 
 /**
  * @swagger
@@ -87,7 +87,7 @@ router.post('/payments', PaymentsController.createPayments);
  *       404:
  *         description: Cliente no encontrado
  */
-// router.get('/customers/:name', PaymentsController.getCustomersByName);
+// router.get('/transactions/:name', TransactionsController.getTransactionsByName);
 
 /**
  * @swagger
@@ -108,7 +108,7 @@ router.post('/payments', PaymentsController.createPayments);
  *       404:
  *         description: Cliente no encontrado
  */
-// router.delete('/customers/:id', PaymentsController.deleteCustomers);
+router.delete('/transactions/:id', TransactionsController.deleteTransactions);
 
 /**
  * @swagger
@@ -144,6 +144,6 @@ router.post('/payments', PaymentsController.createPayments);
  *       404:
  *         description: Cliente no encontrado
  */
-// router.put('/customers/:id', PaymentsController.updateCustomers);
+router.put('/transactions/:id', TransactionsController.updateTransactions);
 
 module.exports = router;

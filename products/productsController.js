@@ -2,7 +2,7 @@
 const ProductsDao = require('./productsDao');
 
 class ProductsController {
-  static async crearProducto(req, res) {
+  static async createProduct(req, res) {
     try {
       const { name, description, price } = req.body;
       await ProductsDao.crearProducto(name, description, price);
@@ -23,7 +23,7 @@ class ProductsController {
     }
   }
 
-  static async editarProducto(req, res) {
+  static async editProduct(req, res) {
     try {
       const { id } = req.params;
       const { name, description, price } = req.body;
@@ -35,7 +35,7 @@ class ProductsController {
     }
   }
 
-  static async eliminarProducto(req, res) {
+  static async detedProduct(req, res) {
     try {
       const { id } = req.params;
       await ProductsDao.eliminarProducto(id);

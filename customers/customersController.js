@@ -4,8 +4,8 @@ const CustomersDao = require('./customersDao');
 class CustomersController {
   static async createCustomers(req, res) {
     try {
-      const { name, address, coordinates, product } = req.body;
-      await CustomersDao.createCustomers(name, address, coordinates, product);
+      const { name, address, coordinates, product, status } = req.body;
+      await CustomersDao.createCustomers(name, address, coordinates, product, status);
       res.status(200).json({ message: 'Customer recibido correctamente' });
     } catch (err) {
       console.error('Error al crear producto:', err);
@@ -30,6 +30,16 @@ class CustomersController {
     } catch (e) {
       console.error('Error al obtener cantidad de clientes:', e);
       res.status(500).json({ message: 'Error al obtener la cantidad de clientes' });
+    }
+  }
+
+  static async getCountInactive(req, res) {
+    try {
+      const count = await CustomersDao.getCountInactive();
+      res.status(200).json({ count });
+    } catch (e) {
+      console.error('Error al obtener cantidad de clientes inactivos:', e);
+      res.status(500).json({ message: 'Error al obtener la cantidad de clientes inactivos' });
     }
   }
 
