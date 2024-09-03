@@ -2,10 +2,10 @@
 const connection = require('../db');
 
 class TransactionsDao {
-  static async createTransactions(customer, product, type, payment_method, create_at, update_at) {
+  static async createTransactions(customer, product, type, payment_method, amount, create_at, update_at) {
     return new Promise((resolve, reject) => {
       const sql = 'INSERT INTO transactions (customer, product, type, payment_method, create_at, update_at) VALUES (?, ?, ?, ?, ?, ?)';
-      connection.query(sql, [customer, product, type, payment_method, create_at, update_at], (err, results) => {
+      connection.query(sql, [customer, product, type, payment_method, amount, create_at, update_at], (err, results) => {
         if (err) return reject(err);
         resolve(results);
       });
@@ -42,10 +42,10 @@ class TransactionsDao {
     });
   }
 
-  static async updateTransactions(id, customer, product, type, payment_method) {
+  static async updateTransactions(id, customer, product, type, payment_method, amount) {
     return new Promise((resolve, reject) => {
-      const sql = 'UPDATE transactions SET customer = ?, product = ?, type = ?, payment_method = ? WHERE id = ?';
-      connection.query(sql, [customer, product, type, payment_method, id], (err, results) => {
+      const sql = 'UPDATE transactions SET customer = ?, product = ?, type = ?, payment_method = ?, amount = ? WHERE id = ?';
+      connection.query(sql, [customer, product, type, payment_method, id, amount], (err, results) => {
         if (err) return reject(err);
           resolve(results);
       });

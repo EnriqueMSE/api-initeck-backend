@@ -5,9 +5,9 @@ class TransactionsController {
   static async createTransactions(req, res) {
     let create_at = new Date();
     let update_at = new Date();
-    const { customer, product, type, payment_method } = req.body;
+    const { customer, product, type, payment_method, amount } = req.body;
     try {
-      await TransactionsDao.createTransactions(customer, product, type, payment_method, create_at, update_at);
+      await TransactionsDao.createTransactions(customer, product, type, payment_method, amount, create_at, update_at);
       res.status(200).json({ message: 'Movimiento recibido correctamente' });
     } catch (err) {
       console.error('Error al crear el movimiento:', err);
@@ -39,8 +39,8 @@ class TransactionsController {
   static async updateTransactions(req, res) {
     try {
       const { id } = req.params;
-      const { customer, product, type, payment_method } = req.body;
-      await PaymentsDao.updatePay(id, customer, product, type, payment_method);
+      const { customer, product, type, payment_method, amount } = req.body;
+      await PaymentsDao.updatePay(id, customer, product, type, payment_method, amount);
       res.status(200).json({ message: 'Movimiento editado correctamente' });
     } catch (err) {
       console.error('Error al editar el movimiento:', err);
