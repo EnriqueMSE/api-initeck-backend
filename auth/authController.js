@@ -46,7 +46,6 @@ class AuthController {
         try {
             // Verificar si el usuario ya existe
             const username = await AuthDao.getUserByEmail(email, password);
-            // console.log(username);
             // const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
             // if (username.length > 0) {
             //     return res.status(400).json({ message: 'El correo electrónico ya está registrado' });
@@ -54,7 +53,6 @@ class AuthController {
         
             // Hash de la contraseña
             const hashedPassword = await bcrypt.hash(password, 10);
-            console.log(hashedPassword, email);
             // Crear el usuario
             await AuthDao.createUser(email, hashedPassword);
             res.status(201).json({ message: 'Usuario registrado exitosamente' });

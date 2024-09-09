@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const authRouter = require('./auth/authRoutes');
+const generalCatRoutes = require('./generalCat/generalCatRoutes');
 const productsRoutes = require('./products/productsRoutes');
 const customersRoutes = require('./customers/customersRoutes');
 const transactionsRoutes = require('./transactions/transactionsRoutes');
@@ -31,6 +32,7 @@ const swaggerOptions = {
   },
   apis: [
     './auth/authRoutes.js',
+    './generalCat/generalCatRoutes.js',
     './products/productsRoutes.js',
     './customers/customersRoutes.js',
     './transactions/transactionsRoutes.js'
@@ -51,6 +53,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Usar rutas
 app.use('/api', authRouter);
+app.use('/api', generalCatRoutes);
 app.use('/api', productsRoutes);
 app.use('/api', customersRoutes);
 app.use('/api', transactionsRoutes);
