@@ -2,19 +2,29 @@
 const connection = require('../db');
 
 class CustomersDao {
-  static async createCustomers(name, address, coordinates, product, status) {
+  static async createCustomers(id_product, name, address, coordinates, status) {
     return new Promise((resolve, reject) => {
-      const sql = 'INSERT INTO customers (name, address, coordinates, product, status) VALUES (?, ?, ?, ?, ?)';
-      connection.query(sql, [name, address, coordinates, product, status], (err, results) => {
+      const sql = 'INSERT INTO customers (id_product, name, address, coordinates, status) VALUES (?, ?, ?, ?, ?)';
+      connection.query(sql, [id_product, name, address, coordinates, status], (err, results) => {
         if (err) return reject(err);
         resolve(results);
       });
     });
   }
+
+  // static async getCustomers() {
+  //   return new Promise((resolve, reject) => {
+  //     const sql = 'SELECT * FROM customers WHERE is_deleted = 0';
+  //     connection.query(sql, (err, results) => {
+  //       if (err) return reject(err);
+  //       resolve(results);
+  //     });
+  //   });
+  // }
 
   static async getCustomers() {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT * FROM customers WHERE is_deleted = 0';
+      const sql = 'SELECT c.id as id, c.name as name, c.address as address, c.coordinates as coordinates, c.status as status, p.name as product FROM customers c LEFT JOIN products p ON c.id_product = p.id WHERE c.is_deleted = 0';
       connection.query(sql, (err, results) => {
         if (err) return reject(err);
         resolve(results);
@@ -22,15 +32,32 @@ class CustomersDao {
     });
   }
 
+  // static async getMostFrequentProducts() {
+  //   return new Promise((resolve, reject) => {
+  //     const sql = 'SELECT id_product, COUNT(*) AS frequency FROM customers GROUP BY id_product ORDER BY frequency DESC';
+  //     connection.query(sql, (err, results) => {
+  //       if (err) return reject(err);
+  //       resolve(results);
+  //     });
+  //   });
+  // }
+
   static async getMostFrequentProducts() {
     return new Promise((resolve, reject) => {
-      const sql = 'SELECT product, COUNT(*) AS frequency FROM customers GROUP BY product ORDER BY frequency DESC';
+      const sql = `
+        SELECT p.name, c.id_product, COUNT(*) AS frequency
+        FROM customers c
+        JOIN products p ON c.id_product = p.id
+        GROUP BY c.id_product, p.name
+        ORDER BY frequency DESC
+      `;
       connection.query(sql, (err, results) => {
         if (err) return reject(err);
         resolve(results);
       });
     });
   }
+  
 
   static async getCountCustomers() {
     return new Promise((resolve, reject) => {

@@ -37,6 +37,7 @@ const router = express.Router();
  *       400:
  *         description: Error en la solicitud
  */
+
 router.post('/customers', CustomersController.createCustomers);
 
 /**

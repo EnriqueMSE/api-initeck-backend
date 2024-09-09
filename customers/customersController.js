@@ -4,8 +4,8 @@ const CustomersDao = require('./customersDao');
 class CustomersController {
   static async createCustomers(req, res) {
     try {
-      const { name, address, coordinates, product, status } = req.body;
-      await CustomersDao.createCustomers(name, address, coordinates, product, status);
+      const { id_producto, name, address, coordinates, status } = req.body;
+      await CustomersDao.createCustomers(id_producto, name, address, coordinates, status);
       res.status(200).json({ message: 'Customer recibido correctamente' });
     } catch (err) {
       console.error('Error al crear producto:', err);
@@ -103,7 +103,6 @@ class CustomersController {
       res.status(500).json({ message: 'Error al eliminar el producto' });
     }
   }
-
 }
 
 module.exports = CustomersController;
