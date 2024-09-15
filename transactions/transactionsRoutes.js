@@ -146,4 +146,6 @@ router.delete('/transactions/:id', TransactionsController.deleteTransactions);
  */
 router.put('/transactions/:id', TransactionsController.updateTransactions);
 
+router.get('/enforceability', TransactionsController.createEnforceability);
+
 module.exports = router;

@@ -15,6 +15,16 @@ class TransactionsController {
     }
   }
 
+  static async createEnforceability(req, res) {
+    try {
+      await TransactionsDao.createEnforceability();
+      res.status(200).json({ message: 'Obligación creada correctamente' });
+    } catch (err) {
+      console.error('Error al crear la obligación:', err);
+      res.status(500).json({ message: 'Error al crear la obligación' });
+    }
+  }
+
   static async getTransactions(req, res) {
     try {
       const transactions = await TransactionsDao.getTransactions();
