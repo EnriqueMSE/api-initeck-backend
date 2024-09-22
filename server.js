@@ -10,6 +10,9 @@ const generalCatRoutes = require('./generalCat/generalCatRoutes');
 const productsRoutes = require('./products/productsRoutes');
 const customersRoutes = require('./customers/customersRoutes');
 const transactionsRoutes = require('./transactions/transactionsRoutes');
+const enforceabilityRoutes = require('./enforceability/enforceabilityRoutes');
+const cron = require('node-cron');
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -57,6 +60,15 @@ app.use('/api', generalCatRoutes);
 app.use('/api', productsRoutes);
 app.use('/api', customersRoutes);
 app.use('/api', transactionsRoutes);
+
+cron.schedule('0 0 1 * *', () => {
+  console.log('Ejecutando función el primer día de cada mes a las 00:00');
+  ejecutarFuncion();
+});
+
+function ejecutarFuncion() {
+  app.use('/api', enforceabilityRoutes);
+};
 
 // Iniciar el servidor
 app.listen(port, () => {

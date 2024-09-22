@@ -4,8 +4,8 @@ const CustomersDao = require('./customersDao');
 class CustomersController {
   static async createCustomers(req, res) {
     try {
-      const { id_producto, name, address, coordinates, status } = req.body;
-      await CustomersDao.createCustomers(id_producto, name, address, coordinates, status);
+      const { id_producto, name, address, coordinates, contract, account, status } = req.body;
+      await CustomersDao.createCustomers(id_producto, name, address, coordinates, contract, account, status);
       res.status(200).json({ message: 'Customer recibido correctamente' });
     } catch (err) {
       console.error('Error al crear producto:', err);
@@ -72,8 +72,8 @@ class CustomersController {
   static async updateCustomers(req, res) {
     try {
       const { id } = req.params;
-      const { name, address, coordinates, product } = req.body;
-      await CustomersDao.updateCustomers(id, name, address, coordinates, product);
+      const { name, address, coordinates, product, contract, account } = req.body;
+      await CustomersDao.updateCustomers(id, name, address, coordinates, product, contract, account);
       res.status(200).json({ message: 'Producto editado correctamente' });
     } catch (err) {
       console.error('Error al editar producto:', err);
