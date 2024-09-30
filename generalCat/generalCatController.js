@@ -36,6 +36,18 @@ class GeneralCatController {
         }
     }
 
+    static async updateGeneralCat(req, res) {
+        const { id } = req.params;
+        const { code, type, name, status } = req.body;
+        try {
+            await GeneralCatDao.updateGeneralCat(id, code, type, name, status);
+            res.status(200).json({ message: 'Catálogo general actualizado correctamente' });
+        } catch (err) {
+            console.error('Error al actualizar el catálogo general:', err);
+            res.status(500).json({ message: 'Error al actualizar el catálogo general' });
+        }
+    }
+
 }
 
 module.exports = GeneralCatController;

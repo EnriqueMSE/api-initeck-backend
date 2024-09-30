@@ -4,8 +4,8 @@ const CustomersDao = require('./customersDao');
 class CustomersController {
   static async createCustomers(req, res) {
     try {
-      const { id_producto, name, address, coordinates, contract, account, status } = req.body;
-      await CustomersDao.createCustomers(id_producto, name, address, coordinates, contract, account, status);
+      const { id_product, name, address, coordinates, status, contract, account, email } = req.body;
+      await CustomersDao.createCustomers(id_product, name, address, coordinates, status, contract, account, email);
       res.status(200).json({ message: 'Customer recibido correctamente' });
     } catch (err) {
       console.error('Error al crear producto:', err);
@@ -45,13 +45,8 @@ class CustomersController {
 
   static async getMostFrequentProducts(req, res) {
     try {
-      const name_products = await CustomersDao.getMostFrequentProducts();
-      if (name_products.length > 1) {
-      }
-      const mostFrequentProduct = name_products.reduce((max, current) => {
-        return (current.frequency > max.frequency) ? current : max;
-      }, { frequency: -Infinity });
-      res.status(200).json(mostFrequentProduct.product);
+      const getMostFrequentProducts = await CustomersDao.getMostFrequentProducts();
+      res.status(200).json(getMostFrequentProducts);
     } catch (e) {
       console.error('Error al obtener productos más frecuentes:', e);
       res.status(500).json({ message: 'Error al obtener productos más frecuentes' });
@@ -72,8 +67,8 @@ class CustomersController {
   static async updateCustomers(req, res) {
     try {
       const { id } = req.params;
-      const { name, address, coordinates, product, contract, account } = req.body;
-      await CustomersDao.updateCustomers(id, name, address, coordinates, product, contract, account);
+      const { id_product, name, address, coordinates, status, contract, account, email } = req.body;
+      await CustomersDao.updateCustomers(id, id_product, name, address, coordinates, status, contract, account, email);
       res.status(200).json({ message: 'Producto editado correctamente' });
     } catch (err) {
       console.error('Error al editar producto:', err);

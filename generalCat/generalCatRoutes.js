@@ -71,6 +71,8 @@ router.post('/general-cat', GeneralCatController.createGeneralCat);
 
 router.get('/general-cat/:id', GeneralCatController.updateStatus);
 
+router.put('/general-cat/:id', GeneralCatController.updateGeneralCat);
+
 module.exports = router;
 
 // End of generalCatRoutes.js file
