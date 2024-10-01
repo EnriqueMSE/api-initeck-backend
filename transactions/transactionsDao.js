@@ -34,7 +34,8 @@ class TransactionsDao {
   static async getTransactions() {
     return new Promise((resolve, reject) => {
       // const sql = 'SELECT * FROM transactions t JOIN customers c ON t.id_customer';
-      const sql = `SELECT t.id, c.name AS customer, p.name AS product, gc.name AS type, gc2.name AS payment_method, t.amount
+      const sql = `SELECT t.id, c.name AS customer, c.id AS id_customer, p.name AS product, p.id AS id_product,
+                  gc.id AS id_type, gc.name AS type, gc2.id AS id_payment_method, gc2.name AS payment_method, t.amount
                   FROM transactions t
                   JOIN customers c
                   ON c.id = t.id_customer
@@ -49,6 +50,7 @@ class TransactionsDao {
       connection.query(sql, (err, results) => {
         if (err) return reject(err);
         resolve(results);
+        console.log(results);
       });
     });
   }
